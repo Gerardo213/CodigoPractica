@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApi.Models.Persona>
+
+<hr />
+<p>
+	@Html.ActionLink("Crear Persona", "Create", "", new { @class = "btn btn-success" })
+</p>
+<table class="table">
+	<tr>
+		<th>
+			Identificación
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Nombre)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Apellido)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Edad)
+		</th>
+		<th>
+			Dirección
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OtrosDatos)
+		</th>
+		<th> Opciones</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Identificacion)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Nombre)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Apellido)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Edad)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Direccion)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.OtrosDatos)
+			</td>
+			<td>
+				@Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) |
+				@Html.ActionLink("Ver", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-sm" }) |
+				@Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+			</td>
+		</tr>
+	}
+
+</table>
+
+@if (ViewBag.ShowDialog != "true")
+{
+	<!--------------------- Modal ------------------------>
+	<div id="ErrorModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">Atención</h4>
+				</div>
+				<div class="modal-body">
+					<p>@ViewBag.ShowDialog</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@if (ViewBag.ShowDialog != "true")
+{
+	<script>
+		$('#ErrorModal').modal('show');
+	</script>
+}
+
